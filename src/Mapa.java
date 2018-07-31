@@ -4,6 +4,7 @@ public class Mapa {
     private String [][] mapa;
     private Robot robot;
     private GrupoMonedas [][] grupoMonedas;
+    public ArrayList<String> CaracteresMapa= new ArrayList<String>();
 
 
     public String[][] getMapa() {
@@ -12,6 +13,17 @@ public class Mapa {
 
     public void setMapa(String[][] mapa) {
         this.mapa = mapa;
+    }
+
+    public void setCaracteresMapa(ArrayList<String> archivo){
+        ArrayList<String> listamapa = new ArrayList<String>();
+        for (int i = 0; i < archivo.size(); i++) {
+            String[] simbolos = archivo.get(i).split("");
+            for (int j = 0; j < simbolos.length; j++) {
+                listamapa.add(simbolos[j]);
+            }
+
+        }this.CaracteresMapa=listamapa;
     }
 
     public Mapa(ArrayList<String> archivo) {
@@ -40,31 +52,24 @@ public class Mapa {
 
     public String[][] moveRobot(String instruccion,ArrayList<String> archivo){
         if (instruccion.equals("MOVE")){
-            ArrayList<String> listamapa = new ArrayList<String>();
-            for (int i = 0; i < archivo.size(); i++) {
-                String[] simbolos = archivo.get(i).split("");
-                for (int j = 0; j < simbolos.length; j++) {
-                    listamapa.add(simbolos[j]);
-                }
 
-            }
-            if (listamapa.contains(robot.getDireccion())){
+            if (this.CaracteresMapa.contains(robot.getDireccion())){
                 switch (robot.getDireccion()){
                     case "<":
-                        listamapa.set(listamapa.indexOf("<")-1,"<");
-                        listamapa.set(listamapa.indexOf("<")+1," ");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("<")-1,"<");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("<")+1," ");
                         break;
                     case ">":
-                        listamapa.set(listamapa.indexOf(">")+1,">");
-                        listamapa.set(listamapa.indexOf(">")-1," ");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(">")+1,">");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(">")-1," ");
                         break;
                     case "^":
-                        listamapa.set(listamapa.indexOf("^")-archivo.get(0).length(),"^");
-                        listamapa.set(listamapa.indexOf("^")+archivo.get(0).length()," ");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^")-archivo.get(0).length(),"^");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^")+archivo.get(0).length()," ");
                         break;
                     case "V":
-                        listamapa.set(listamapa.indexOf("^")+archivo.get(0).length(),"^");
-                        listamapa.set(listamapa.indexOf("^")-archivo.get(0).length()," ");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^")+archivo.get(0).length(),"^");
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^")-archivo.get(0).length()," ");
                 }
             }
             this.mapa = new String[archivo.size()][archivo.get(0).length()];
@@ -72,17 +77,52 @@ public class Mapa {
             do {
                 for (int i = 0; i < archivo.size(); i++) {
                     for (int j = 0; j < archivo.get(0).length(); j++) {
-                        mapa[i][j] = listamapa.get(z);
+                        mapa[i][j] = this.CaracteresMapa.get(z);
                         this.mapa[i][j]=mapa[i][j];
                         z += 1;
                     }
                 }
-            } while (z != listamapa.size());
+            } while (z != this.CaracteresMapa.size());
 
         }return this.mapa;
     }
 
-    public String [][] RotateRobot(String instruccion, )
+    public String [][] RotateRobot (String instruccion, ArrayList<String> archivo) {
+        if (instruccion.equals("ROTATE")) {
+
+            if (this.CaracteresMapa.contains(robot.getDireccion())){
+                String direccionanterior= robot.getDireccion();
+                robot.CambiarDireccion();
+                switch (robot.getDireccion()){
+                    case "^":
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(direccionanterior),"^");
+                        break;
+                    case ">":
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(direccionanterior),">");
+                        break;
+                    case "V":
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(direccionanterior),"V");
+                        break;
+                    case "<":
+                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(direccionanterior),"<");
+                        break;
+                }
+            }
+            this.mapa = new String[archivo.size()][archivo.get(0).length()];
+            int z = 0;
+            do {
+                for (int i = 0; i < archivo.size(); i++) {
+                    for (int j = 0; j < archivo.get(0).length(); j++) {
+                        mapa[i][j] = this.CaracteresMapa.get(z);
+                        this.mapa[i][j]=mapa[i][j];
+                        z += 1;
+                    }
+                }
+            } while (z != this.CaracteresMapa.size());
+
+        }return this.mapa;
+    }
+
 
     @Override
     public String toString() {

@@ -49,6 +49,7 @@ public class main {
             map+="\n";
         }
         Mapa mimapa = new Mapa(ejemplo);
+        mimapa.setCaracteresMapa(ejemplo);
         System.out.println(mimapa);
 
         ArrayList<String> instrucciones = new ArrayList<String>();
@@ -63,9 +64,16 @@ public class main {
         }
         instrucciones.forEach(a -> System.out.println(a));
 
+
         mimapa.moveRobot("MOVE",ejemplo);
         System.out.println(mimapa);
-        System.out.println(listamapa.indexOf("<"));
+
+        mimapa.RotateRobot("ROTATE",ejemplo);
+        System.out.println(mimapa);
+        mimapa.moveRobot("MOVE",ejemplo);
+        System.out.println(mimapa);
+        mimapa.RotateRobot("ROTATE",ejemplo);
+        System.out.println(mimapa);
 
 
 

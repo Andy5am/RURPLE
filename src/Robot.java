@@ -53,8 +53,7 @@ public class Robot {
         return direccion;
     }
 
-    public void CambiarDireccion(String instruccion) {
-        if (instruccion.equals("ROTATE")){
+    public void   CambiarDireccion() {
             switch (this.direccion){
                 case VIENDO_ARRIBA:
                     this.direccion=VIENDO_DERECHA;
@@ -69,7 +68,7 @@ public class Robot {
                     this.direccion=VIENDO_ARRIBA;
                     break;
             }
-        }
+
     }
 
     public String[][] getPosicion() {
