@@ -78,6 +78,9 @@ public class Robot {
     public void setPosicion(ArrayList<String> archivo) {
 
     }
+    public void PickMoneda(){
+        this.monedas+=1;
+    }
 
 
     @Override

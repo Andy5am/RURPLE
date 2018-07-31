@@ -50,6 +50,8 @@ public class main {
         }
         Mapa mimapa = new Mapa(ejemplo);
         mimapa.setCaracteresMapa(ejemplo);
+        mimapa.setFilas(ejemplo);
+        mimapa.setColumnas(ejemplo);
         System.out.println(mimapa);
 
         ArrayList<String> instrucciones = new ArrayList<String>();

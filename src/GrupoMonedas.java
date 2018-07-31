@@ -16,6 +16,10 @@ public class GrupoMonedas {
         this.monedas = monedas;
     }
 
+    public void PickedMoneda(){
+        this.monedas-=1;
+    }
+
     public String [][] getPosicion() {
         return posicion;
     }

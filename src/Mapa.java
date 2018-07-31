@@ -4,7 +4,9 @@ public class Mapa {
     private String [][] mapa;
     private Robot robot;
     private GrupoMonedas [][] grupoMonedas;
-    public ArrayList<String> CaracteresMapa= new ArrayList<String>();
+    private ArrayList<String> CaracteresMapa= new ArrayList<String>();
+    private int Filas;
+    private int Columnas;
 
 
     public String[][] getMapa() {
@@ -13,6 +15,12 @@ public class Mapa {
 
     public void setMapa(String[][] mapa) {
         this.mapa = mapa;
+    }
+    public void setFilas(ArrayList<String> archivo){
+        this.Filas=archivo.size();
+    }
+    public void setColumnas(ArrayList<String> archivo){
+        this.Columnas=archivo.get(0).length();
     }
 
     public void setCaracteresMapa(ArrayList<String> archivo){
@@ -127,8 +135,8 @@ public class Mapa {
     @Override
     public String toString() {
         String map = "";
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 37; j++) {
+        for (int i = 0; i < this.Filas; i++) {
+            for (int j = 0; j < this.Columnas; j++) {
                 map += this.mapa[i][j];
             }
             map += "\n";
