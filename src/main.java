@@ -18,36 +18,8 @@ public class main {
         }catch (IOException e ){
             System.out.println("Error!");
         }
-        System.out.println("Mapa");
-        ejemplo.forEach(a -> System.out.println(a));
 
 
-        ArrayList<String> listamapa = new ArrayList<String>();
-        for (int i=0; i < ejemplo.size();i++){
-            String[] simbolos = ejemplo.get(i).split("");
-            for (int j =0; j < simbolos.length ; j++){
-                listamapa.add(simbolos[j]);
-            }
-
-        }
-        String[][] mapa = new String[ejemplo.size()][ejemplo.get(0).length()];
-        int z = 0;
-        String map = "";
-        do {
-            for(int i =0 ; i < ejemplo.size();i++){
-                for (int j=0; j<ejemplo.get(0).length();j++){
-                    mapa[i][j] = listamapa.get(z);
-                    z+= 1 ;
-                }
-            }
-        }while (z!= listamapa.size());
-
-        for(int i = 0 ;i < 12 ; i++){
-            for (int j = 0; j<37 ;j++){
-                map += mapa[i][j];
-            }
-            map+="\n";
-        }
         Mapa mimapa = new Mapa(ejemplo);
         mimapa.setCaracteresMapa(ejemplo);
         mimapa.setFilas(ejemplo);
