@@ -3,11 +3,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class main {
     public static void main(String[] args){
-
+        Scanner input= new Scanner(System.in);
         ArrayList<String> ejemplo = new ArrayList<String>();
         try {
             Stream<String>lines = Files.lines(
@@ -19,13 +20,6 @@ public class main {
             System.out.println("Error!");
         }
 
-
-        Mapa mimapa = new Mapa(ejemplo);
-        mimapa.setCaracteresMapa(ejemplo);
-        mimapa.setFilas(ejemplo);
-        mimapa.setColumnas(ejemplo);
-        System.out.println(mimapa);
-
         ArrayList<String> instrucciones = new ArrayList<String>();
         try {
             Stream<String>lines = Files.lines(
@@ -36,18 +30,28 @@ public class main {
         }catch (IOException e ){
             System.out.println("Error!");
         }
-        instrucciones.forEach(a -> System.out.println(a));
 
 
-        mimapa.moveRobot("MOVE",ejemplo);
+        Mapa mimapa = new Mapa(ejemplo);
+        GrupoMonedas mismonedas =new GrupoMonedas(ejemplo);
+        System.out.println(mismonedas);
+        mimapa.setCaracteresMapa(ejemplo);
+        mimapa.setFilas(ejemplo);
+        mimapa.setColumnas(ejemplo);
         System.out.println(mimapa);
 
-        mimapa.RotateRobot("ROTATE",ejemplo);
-        System.out.println(mimapa);
-        mimapa.moveRobot("MOVE",ejemplo);
-        System.out.println(mimapa);
-        mimapa.RotateRobot("ROTATE",ejemplo);
-        System.out.println(mimapa);
+        for (int a =0;a<instrucciones.size();a++){
+            if (instrucciones.get(a).equals("MOVE")){
+                mimapa.moveRobot(instrucciones.get(a),ejemplo);
+                System.out.println(mimapa);
+            }else if (instrucciones.get(a).equals("ROTATE")){
+                mimapa.RotateRobot(instrucciones.get(a),ejemplo);
+                System.out.println(mimapa);
+            }else if (instrucciones.get(a).equals("PICK")){
+                mimapa.Pickmoneda(instrucciones.get(a),ejemplo);
+                System.out.println(mimapa);
+            }
+        }
 
 
 

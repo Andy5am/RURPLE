@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class GrupoMonedas {
-    private ArrayList<Integer> monedas= new ArrayList<Integer>();
-    private ArrayList<Integer> posicion= new ArrayList<Integer>();
+    private ArrayList<Integer> monedas= new ArrayList<>();
+    private ArrayList<Integer> posicion= new ArrayList<>();
 
     public GrupoMonedas(ArrayList<String> archivo) {
         ArrayList<String> listamapa = new ArrayList<String>();
@@ -20,11 +20,10 @@ public class GrupoMonedas {
             for (int i = 0; i < archivo.size(); i++) {
                 for (int j = 0; j < archivo.get(0).length(); j++) {
                     mapa[i][j] = listamapa.get(z);
-                    if (!listamapa.get(z).equals(" ")||!listamapa.get(z).equals("*")||!listamapa.get(z).equals("<")
-                            ||listamapa.get(z).equals(">")||listamapa.get(z).equals("V")||listamapa.get(z).equals("^")){
-
+                    if (!listamapa.get(z).equals(" ")&&!listamapa.get(z).equals("*")&&!listamapa.get(z).equals("<")
+                            &&!listamapa.get(z).equals(">")&&!listamapa.get(z).equals("V")&&!listamapa.get(z).equals("^")){
                         this.monedas.add(Integer.parseInt(listamapa.get(z)));
-                        this.posicion.add(listamapa.indexOf(this.monedas));
+                        this.posicion.add(listamapa.indexOf(listamapa.get(z)));
 
 
                     }
@@ -50,10 +49,16 @@ public class GrupoMonedas {
         return posicion.get(index);
 
     }
+    public int getGruposMonedas(){
+        return posicion.size();
+    }
 
     @Override
     public String toString() {
+        String result = "";
+        result+= monedas;
 
-        return super.toString();
+
+        return result;
     }
 }

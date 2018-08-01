@@ -4,7 +4,6 @@ public class Robot {
 
     private int monedas = 0;
     private String direccion;
-    public String [][] posicion;
     public static final String VIENDO_ARRIBA = "^";
     public static final String VIENDO_DERECHA = ">";
     public static final String VIENDO_ABAJO = "V";
@@ -42,12 +41,7 @@ public class Robot {
         return monedas;
     }
 
-    public void agarrarmonedas(String instruccion, GrupoMonedas posicionmoneda) {
-        if (instruccion.equals("PICK")&& posicionmoneda.getPosicion()== this.posicion ) {
-            monedas++;
 
-        }
-    }
 
     public String getDireccion() {
         return direccion;
@@ -71,13 +65,6 @@ public class Robot {
 
     }
 
-    public String[][] getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(ArrayList<String> archivo) {
-
-    }
     public void PickMoneda(){
         this.monedas+=1;
     }
