@@ -1,4 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
 import java.util.ArrayList;
 
@@ -181,8 +180,15 @@ public class Mapa {
             } while (z != this.CaracteresMapa.size());
         }return this.mapa;
     }
-
-
+    public boolean TareaCompletada(){
+        for (int i=0;i<grupoMonedas.getGruposMonedas();i++){
+            int suma = grupoMonedas.getMonedas(i);
+            if (suma==0){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 

@@ -9,10 +9,12 @@ import java.util.stream.Stream;
 public class main {
     public static void main(String[] args){
         Scanner input= new Scanner(System.in);
+        System.out.println("Ingrese el nombre del archivo del mapa:");
+        String mapa = input.nextLine();
         ArrayList<String> ejemplo = new ArrayList<String>();
         try {
             Stream<String>lines = Files.lines(
-                    Paths.get("C:/Users/Andy Castillo/Documents/POO/mapa.txt"),
+                    Paths.get("C:/Users/Andy Castillo/Documents/POO/"+mapa),
                     StandardCharsets.UTF_8
             );
             lines.forEach(a -> ejemplo.add(a));
@@ -20,10 +22,12 @@ public class main {
             System.out.println("Error!");
         }
 
+        System.out.println("Ingrese el nombre del archivo de instrucciones:");
+        String Intrucciones = input.nextLine();
         ArrayList<String> instrucciones = new ArrayList<String>();
         try {
             Stream<String>lines = Files.lines(
-                    Paths.get("C:/Users/Andy Castillo/Documents/POO/instrucciones.txt"),
+                    Paths.get("C:/Users/Andy Castillo/Documents/POO/"+Intrucciones),
                     StandardCharsets.UTF_8
             );
             lines.forEach(a -> instrucciones.add(a));
@@ -51,6 +55,11 @@ public class main {
                 mimapa.Pickmoneda(instrucciones.get(a),ejemplo);
                 System.out.println(mimapa);
             }
+        }
+        if(mimapa.TareaCompletada()){
+            System.out.println("El robot ha recogido todas las monedas");
+        }else {
+            System.out.println("El robot ha fallado en recoger todas las monedas");
         }
 
 
