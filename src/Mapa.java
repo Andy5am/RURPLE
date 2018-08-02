@@ -55,48 +55,56 @@ public class Mapa {
 
     }
 
-    public String[][] moveRobot(String instruccion, ArrayList<String> archivo) {
+    public void moveRobot(String instruccion, ArrayList<String> archivo) {
         if (instruccion.equals("MOVE")) {
 
             if (this.CaracteresMapa.contains(robot.getDireccion())) {
                 switch (robot.getDireccion()) {
                     case "<":
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("<") - 1, "<");
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("<") + 1, " ");
-                        for (int i =0;i<grupoMonedas.getGruposMonedas();i++){
-                            if (this.CaracteresMapa.indexOf("<")+1== grupoMonedas.getPosicion(i)){
-                                this.CaracteresMapa.set(grupoMonedas.getPosicion(i),String.valueOf(grupoMonedas.getMonedas(i)));
+                        if (!this.CaracteresMapa.get(this.CaracteresMapa.indexOf("<")-1).equals("*")) {
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf("<") - 1, "<");
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf("<") + 1, " ");
+                            for (int i = 0; i < grupoMonedas.getGruposMonedas(); i++) {
+                                if (this.CaracteresMapa.indexOf("<") + 1 == grupoMonedas.getPosicion(i)) {
+                                    this.CaracteresMapa.set(grupoMonedas.getPosicion(i), String.valueOf(grupoMonedas.getMonedas(i)));
+                                }
+
                             }
                         }
                         break;
 
                     case ">":
-
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(">") + 1, ">");
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf(">") , " ");
-                        for (int i =0;i<grupoMonedas.getGruposMonedas();i++){
-                            if (this.CaracteresMapa.indexOf(">")-1== grupoMonedas.getPosicion(i)){
-                                this.CaracteresMapa.set(grupoMonedas.getPosicion(i),String.valueOf(grupoMonedas.getMonedas(i)));
+                        if (!this.CaracteresMapa.get(this.CaracteresMapa.indexOf(">")+1).equals("*")) {
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf(">") + 1, ">");
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf(">"), " ");
+                            for (int i = 0; i < grupoMonedas.getGruposMonedas(); i++) {
+                                if (this.CaracteresMapa.indexOf(">") - 1 == grupoMonedas.getPosicion(i)) {
+                                    this.CaracteresMapa.set(grupoMonedas.getPosicion(i), String.valueOf(grupoMonedas.getMonedas(i)));
+                                }
                             }
                         }
                         break;
 
                     case "^":
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^") - archivo.get(0).length(), "^");
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^") + archivo.get(0).length(), " ");
-                        for (int i =0;i<grupoMonedas.getGruposMonedas();i++){
-                            if (this.CaracteresMapa.indexOf("^")+archivo.get(0).length()== grupoMonedas.getPosicion(i)){
-                                this.CaracteresMapa.set(grupoMonedas.getPosicion(i),String.valueOf(grupoMonedas.getMonedas(i)));
+                        if (!this.CaracteresMapa.get(this.CaracteresMapa.indexOf("^")-archivo.get(0).length()).equals("*")) {
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^") - archivo.get(0).length(), "^");
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf("^") + archivo.get(0).length(), " ");
+                            for (int i = 0; i < grupoMonedas.getGruposMonedas(); i++) {
+                                if (this.CaracteresMapa.indexOf("^") + archivo.get(0).length() == grupoMonedas.getPosicion(i)) {
+                                    this.CaracteresMapa.set(grupoMonedas.getPosicion(i), String.valueOf(grupoMonedas.getMonedas(i)));
+                                }
                             }
                         }
                         break;
 
                     case "V":
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("V") + archivo.get(0).length(), "V");
-                        this.CaracteresMapa.set(this.CaracteresMapa.indexOf("V") , " ");
-                        for (int i =0;i<grupoMonedas.getGruposMonedas();i++){
-                            if (this.CaracteresMapa.indexOf("V") - archivo.get(1).length() == grupoMonedas.getPosicion(i)){
-                                this.CaracteresMapa.set(grupoMonedas.getPosicion(i),String.valueOf(grupoMonedas.getMonedas(i)));
+                        if (!this.CaracteresMapa.get(this.CaracteresMapa.indexOf("V")+archivo.get(0).length()).equals("*")) {
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf("V") + archivo.get(0).length(), "V");
+                            this.CaracteresMapa.set(this.CaracteresMapa.indexOf("V"), " ");
+                            for (int i = 0; i < grupoMonedas.getGruposMonedas(); i++) {
+                                if (this.CaracteresMapa.indexOf("V") - archivo.get(1).length() == grupoMonedas.getPosicion(i)) {
+                                    this.CaracteresMapa.set(grupoMonedas.getPosicion(i), String.valueOf(grupoMonedas.getMonedas(i)));
+                                }
                             }
                         }
                         break;
@@ -105,23 +113,11 @@ public class Mapa {
                 }
             }
 
-            this.mapa = new String[archivo.size()][archivo.get(0).length()];
-            int z = 0;
-            do {
-                for (int i = 0; i < archivo.size(); i++) {
-                    for (int j = 0; j < archivo.get(0).length(); j++) {
-                        mapa[i][j] = this.CaracteresMapa.get(z);
-                        this.mapa[i][j] = mapa[i][j];
-                        z += 1;
-                    }
-                }
-            } while (z != this.CaracteresMapa.size());
-
         }
-        return this.mapa;
+        this.Actualizarmapa(archivo);
     }
 
-    public String[][] RotateRobot(String instruccion, ArrayList<String> archivo) {
+    public void RotateRobot(String instruccion, ArrayList<String> archivo) {
         if (instruccion.equals("ROTATE")) {
 
             if (this.CaracteresMapa.contains(robot.getDireccion())) {
@@ -142,53 +138,51 @@ public class Mapa {
                         break;
                 }
             }
-            this.mapa = new String[archivo.size()][archivo.get(0).length()];
-            int z = 0;
-            do {
-                for (int i = 0; i < archivo.size(); i++) {
-                    for (int j = 0; j < archivo.get(0).length(); j++) {
-                        mapa[i][j] = this.CaracteresMapa.get(z);
-                        this.mapa[i][j] = mapa[i][j];
-                        z += 1;
-                    }
-                }
-            } while (z != this.CaracteresMapa.size());
-
         }
-        return this.mapa;
+        this.Actualizarmapa(archivo);
     }
 
-    public String[][] Pickmoneda(String instruccion, ArrayList<String> archivo) {
+    public void Pickmoneda(String instruccion, ArrayList<String> archivo) {
         if (instruccion.equals("PICK")) {
-            for (int i=0; i < grupoMonedas.getGruposMonedas(); i++) {
+            for (int i = 0; i < grupoMonedas.getGruposMonedas(); i++) {
                 if (this.CaracteresMapa.indexOf(robot.getDireccion()) == grupoMonedas.getPosicion(i)) {
                     grupoMonedas.PickedMoneda(i);
                     robot.PickMoneda();
                 }
 
             }
-            this.mapa = new String[archivo.size()][archivo.get(0).length()];
-            int z = 0;
-            do {
-                for (int i = 0; i < archivo.size(); i++) {
-                    for (int j = 0; j < archivo.get(0).length(); j++) {
-                        mapa[i][j] = this.CaracteresMapa.get(z);
-                        this.mapa[i][j] = mapa[i][j];
-                        z += 1;
-                    }
-                }
-            } while (z != this.CaracteresMapa.size());
-        }return this.mapa;
+        }
+        this.Actualizarmapa(archivo);
+
     }
     public boolean TareaCompletada(){
+        int suma=0;
         for (int i=0;i<grupoMonedas.getGruposMonedas();i++){
-            int suma = grupoMonedas.getMonedas(i);
-            if (suma==0){
-                return true;
-            }
+            suma+=grupoMonedas.getMonedas(i);
+        }
+        if (suma==0){
+            return true;
         }
         return false;
     }
+    private String [][] Actualizarmapa(ArrayList<String> archivo){
+        this.mapa = new String[archivo.size()][archivo.get(0).length()];
+        int z = 0;
+        do {
+            for (int i = 0; i < archivo.size(); i++) {
+                for (int j = 0; j < archivo.get(0).length(); j++) {
+                    mapa[i][j] = this.CaracteresMapa.get(z);
+                    this.mapa[i][j] = mapa[i][j];
+                    z += 1;
+                }
+            }
+        } while (z != this.CaracteresMapa.size());
+
+
+        return this.mapa;
+
+    }
+
 
 
 

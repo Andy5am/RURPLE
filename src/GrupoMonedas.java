@@ -22,8 +22,10 @@ public class GrupoMonedas {
                     mapa[i][j] = listamapa.get(z);
                     if (!listamapa.get(z).equals(" ")&&!listamapa.get(z).equals("*")&&!listamapa.get(z).equals("<")
                             &&!listamapa.get(z).equals(">")&&!listamapa.get(z).equals("V")&&!listamapa.get(z).equals("^")){
+
+                        this.posicion.add(z);
                         this.monedas.add(Integer.parseInt(listamapa.get(z)));
-                        this.posicion.add(listamapa.indexOf(listamapa.get(z)));
+
 
 
                     }

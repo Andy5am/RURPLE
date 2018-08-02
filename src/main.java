@@ -35,10 +35,7 @@ public class main {
             System.out.println("Error!");
         }
 
-
         Mapa mimapa = new Mapa(ejemplo);
-        GrupoMonedas mismonedas =new GrupoMonedas(ejemplo);
-        System.out.println(mismonedas);
         mimapa.setCaracteresMapa(ejemplo);
         mimapa.setFilas(ejemplo);
         mimapa.setColumnas(ejemplo);
@@ -54,6 +51,11 @@ public class main {
             }else if (instrucciones.get(a).equals("PICK")){
                 mimapa.Pickmoneda(instrucciones.get(a),ejemplo);
                 System.out.println(mimapa);
+            }
+            try{
+                Thread.sleep(700);
+            }catch (Exception e){
+                System.out.println("Error en timer");
             }
         }
         if(mimapa.TareaCompletada()){
