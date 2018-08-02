@@ -25,9 +25,6 @@ public class GrupoMonedas {
 
                         this.posicion.add(z);
                         this.monedas.add(Integer.parseInt(listamapa.get(z)));
-
-
-
                     }
 
                     z += 1;
@@ -35,13 +32,9 @@ public class GrupoMonedas {
             }
         } while (z != listamapa.size());
     }
-
-
-
     public int getMonedas(int index) {
         return monedas.get(index);
     }
-
 
     public void PickedMoneda(int index){
         this.monedas.set(index,this.monedas.get(index)-1);

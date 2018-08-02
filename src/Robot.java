@@ -41,8 +41,6 @@ public class Robot {
         return monedas;
     }
 
-
-
     public String getDireccion() {
         return direccion;
     }
@@ -62,13 +60,10 @@ public class Robot {
                     this.direccion=VIENDO_ARRIBA;
                     break;
             }
-
     }
-
     public void PickMoneda(){
         this.monedas+=1;
     }
-
 
     @Override
     public String toString() {
